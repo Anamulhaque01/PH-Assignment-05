@@ -3,15 +3,18 @@ const mainContainer = document.getElementById("main-container")
 
 // console.log(countMainContainer)
 
-
+const loadingSpinner = document.getElementById("loadingSpinner");
 
 
 
 async function loadData() {
+    loadingSpinner.classList.remove("hidden");
+    loadingSpinner.classList.add("flex");
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const result = await res.json();
 
-
+    loadingSpinner.classList.add("hidden");
+    loadingSpinner.classList.remove("flex");
     displayAllElement(result.data);
 }
 

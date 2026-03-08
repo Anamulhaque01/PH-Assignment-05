@@ -19,7 +19,7 @@
 
     </style>
 </head>
-<body class="bg-[#F8FAFC]">
+<body class="bg-[#F8FAFC] min-h-[945px]">
     <header>
         <nav class="h-18 px-15 flex items-center justify-between shadow-xs bg-white">
             <div class="flex items-center gap-3">
@@ -65,6 +65,11 @@
                 <div id="main-container" class="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 shadow gap-4  rounded-b-2xl">
                     
                 </div>
+
+                <div id="loadingSpinner" class="h-[60vh] hidden justify-center items-center">
+                    <span class="loading loading-spinner loading-xl text-blue-600"></span>
+                </div>
+
                 <div class="h-20"></div>
             </div>
         </div>
