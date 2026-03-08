@@ -148,16 +148,16 @@ function displayAllElement(issues) {
         console.log(issue);
         const card = document.createElement("div");
         card.className = `shadow bg-white rounded border-t-6 ${borderColor} hover:cursor-pointer`;
-        card.innerHTML = `<div class="flex items-center justify-between p-5">
+        card.innerHTML = `<div class="flex flex-wrap items-center justify-between p-5">
                         <img src="${statusImg}" alt="">
                         <div class="rounded-full px-7 py-1 ${priorityColor}  text-[15px]" id = "priority">${issue.priority.toUpperCase()}</div>
                     </div>
 
-                    <div class="px-5 h-50">
-                        <p class="font-semibold text-2xl mb-3 min-h-15">${issue.title}</p>
+                    <div class="px-5 min-h-50">
+                        <p class="line-clamp-2 font-semibold text-2xl mb-3 min-h-15">${issue.title}</p>
                         <p class="line-clamp-2 text-[#64748B] mb-4">${issue.description}</p>
 
-                        <div class="flex items-center gap-2 pb-5">
+                        <div class="flex flex-wrap items-center justify-center gap-2 pb-5">
                             ${hasBug}
                         </div>
                         </div>
