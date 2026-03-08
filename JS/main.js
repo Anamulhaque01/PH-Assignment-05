@@ -1,9 +1,93 @@
 const mainContainer = document.getElementById("main-container")
-// const countMainContainer = container.children.length;
+const openContainer = document.getElementById("open-container")
+const closeContainer = document.getElementById("close-container")
 
-// console.log(countMainContainer)
+const allIssue = document.getElementById("all-issue")
+const openIssue = document.getElementById("open-issue")
+const closeIssue = document.getElementById("close-issue")
+
+const issueCounter = document.getElementById("Issue-counter")
+
+
+
+const countMainContainer = mainContainer.children.length;
+issueCounter.innerText = countMainContainer;
 
 const loadingSpinner = document.getElementById("loadingSpinner");
+
+
+
+function allContainer() {
+    const countMainContainer = mainContainer.children.length;
+    issueCounter.innerText = countMainContainer;
+
+    allIssue.className = "border bg-[#4A00FF] rounded w-[120px] h-10 text-white hover:cursor-pointer"
+    openIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    closeIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+
+    loadingSpinner.classList.remove("hidden");
+    loadingSpinner.classList.add("flex");
+
+    mainContainer.classList.remove("hidden");
+    mainContainer.classList.add("grid");
+
+    openContainer.classList.remove("grid");
+    openContainer.classList.add("hidden");
+
+    closeContainer.classList.remove("grid");
+    closeContainer.classList.add("hidden");
+
+    loadingSpinner.classList.add("hidden");
+    loadingSpinner.classList.remove("flex");
+}
+
+function openedContainer() {
+    const countMainContainer = openContainer.children.length;
+    issueCounter.innerText = countMainContainer;
+
+    allIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    openIssue.className = "border bg-[#4A00FF] rounded w-[120px] h-10 text-white hover:cursor-pointer"
+    closeIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+
+    loadingSpinner.classList.remove("hidden");
+    loadingSpinner.classList.add("flex");
+
+    openContainer.classList.remove("hidden");
+    openContainer.classList.add("grid");
+
+    mainContainer.classList.remove("grid");
+    mainContainer.classList.add("hidden");
+
+    closeContainer.classList.remove("grid");
+    closeContainer.classList.add("hidden");
+
+    loadingSpinner.classList.add("hidden");
+    loadingSpinner.classList.remove("flex");
+}
+
+function closedContainer() {
+    const countMainContainer = closeContainer.children.length;
+    issueCounter.innerText = countMainContainer;
+
+    allIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    openIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    closeIssue.className = "border bg-[#4A00FF] rounded w-[120px] h-10 text-white hover:cursor-pointer"
+
+    loadingSpinner.classList.remove("hidden");
+    loadingSpinner.classList.add("flex");
+
+    closeContainer.classList.remove("hidden");
+    closeContainer.classList.add("grid");
+
+    openContainer.classList.remove("grid");
+    openContainer.classList.add("hidden");
+
+    mainContainer.classList.remove("grid");
+    mainContainer.classList.add("hidden");
+
+    loadingSpinner.classList.add("hidden");
+    loadingSpinner.classList.remove("flex");
+}
 
 
 
@@ -16,6 +100,8 @@ async function loadData() {
     loadingSpinner.classList.add("hidden");
     loadingSpinner.classList.remove("flex");
     displayAllElement(result.data);
+
+    allContainer();
 }
 
 function displayAllElement(issues) {
@@ -68,7 +154,7 @@ function displayAllElement(issues) {
                     </div>
 
                     <div class="px-5 h-50">
-                        <p class="font-semibold text-2xl mb-3 h-15">${issue.title}</p>
+                        <p class="font-semibold text-2xl mb-3 min-h-15">${issue.title}</p>
                         <p class="line-clamp-2 text-[#64748B] mb-4">${issue.description}</p>
 
                         <div class="flex items-center gap-2 pb-5">
@@ -82,7 +168,19 @@ function displayAllElement(issues) {
                         </div>`;
 
         mainContainer.appendChild(card)
+        if (issue.status.toLowerCase() === "open") {
+            const openClone = card.cloneNode(true);
+            openContainer.appendChild(openClone);
+        }
+        else if (issue.status.toLowerCase() === "closed") {
+            const closedClone = card.cloneNode(true);
+            closeContainer.appendChild(closedClone);
+        }
+
+        allContainer();
     });
 }
 
+
+allContainer();
 loadData();

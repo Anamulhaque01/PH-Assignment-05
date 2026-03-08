@@ -31,9 +31,9 @@
     </header>
     <main class="max-w-[90%] m-auto">
         <div class="w-full h-[88px] bg-white mt-[60px] shadow rounded-xl flex items-center px-5 gap-3">
-            <button class="border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer">All</button>
-            <button class="border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer">Open</button>
-            <button class="border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer">Close</button>
+            <button onclick="allContainer()" class="" id="all-issue">All</button>
+            <button onclick="openedContainer()" class="" id="open-issue">Open</button>
+            <button onclick="closedContainer()" class="" id="close-issue">Close</button>
         </div>
         <div>
             <div class="w-full h-[88px] bg-white mt-5 shadow rounded-t-xl flex items-center px-5 gap-3">
@@ -41,7 +41,7 @@
                     <div class="flex items-center gap-3">
                         <div class="p-2 bg-purple-100 rounded-full"><img src="assets/Aperture.png" alt=""></div>
                         <div>
-                            <h1 class="font-semibold text-xl"><span>0</span> Issues</h1>
+                            <h1 class="font-semibold text-xl"><span id="Issue-counter">0</span> Issues</h1>
                             <p class="text-[#64748B]">Track and manage your project issues</p>
                         </div>
                     </div>
@@ -68,6 +68,14 @@
 
                 <div id="loadingSpinner" class="h-[60vh] hidden justify-center items-center">
                     <span class="loading loading-spinner loading-xl text-blue-600"></span>
+                </div>
+
+                <div id="open-container" class="p-5  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 shadow gap-4  rounded-b-2xl hidden">
+                    
+                </div>
+
+                <div id="close-container" class="p-5  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 shadow gap-4  rounded-b-2xl hidden">
+                    
                 </div>
 
                 <div class="h-20"></div>
