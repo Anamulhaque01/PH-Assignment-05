@@ -22,8 +22,8 @@ function allContainer() {
     issueCounter.innerText = countMainContainer;
 
     allIssue.className = "border bg-[#4A00FF] rounded w-[120px] h-10 text-white hover:cursor-pointer"
-    openIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
-    closeIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    openIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer hover:bg-gray-200"
+    closeIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer hover:bg-gray-200"
 
     loadingSpinner.classList.remove("hidden");
     loadingSpinner.classList.add("flex");
@@ -45,9 +45,9 @@ function openedContainer() {
     const countMainContainer = openContainer.children.length;
     issueCounter.innerText = countMainContainer;
 
-    allIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    allIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer hover:bg-gray-200"
     openIssue.className = "border bg-[#4A00FF] rounded w-[120px] h-10 text-white hover:cursor-pointer"
-    closeIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    closeIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer hover:bg-gray-200"
 
     loadingSpinner.classList.remove("hidden");
     loadingSpinner.classList.add("flex");
@@ -69,8 +69,8 @@ function closedContainer() {
     const countMainContainer = closeContainer.children.length;
     issueCounter.innerText = countMainContainer;
 
-    allIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
-    openIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer"
+    allIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer hover:bg-gray-200"
+    openIssue.className = "border border-[#E4E4E7] rounded w-[120px] h-10 text-[#64748B] hover:cursor-pointer hover:bg-gray-200"
     closeIssue.className = "border bg-[#4A00FF] rounded w-[120px] h-10 text-white hover:cursor-pointer"
 
     loadingSpinner.classList.remove("hidden");
@@ -113,19 +113,29 @@ function displayAllElement(issues) {
         let BorderColor = "";
         let statusImg = "";
         let hasBug = "";
+        let help = "";
+        let enhancement = "";
+        let goodFirstIssue = "";
+        let documented = ""
+
 
         if (issue.labels.includes("bug") === true) {
-            hasBug = `<div class="rounded-full px-3 py-1 bg-red-200 text-red-500 text-[15px] flex items-center gap-1"><img src="assets/Vector (1).png" alt=""> BUG</div>
-
-                            <div class="rounded-full px-3 py-1 bg-orange-200 text-orange-500 text-[15px] flex items-center gap-1"><img src="assets/Vector.png" alt=""> HELP WANTED</div>`
+            hasBug = `<div class="rounded-full px-3 py-1 bg-red-200 text-red-500 text-[15px] flex items-center gap-1"><img src="assets/Vector (1).png" alt=""> BUG</div>`
         }
 
-        else if (issue.labels.includes("enhancement") === true) {
-            hasBug = `<div class="rounded-full px-3 py-1 bg-green-200 text-green-500 text-[15px] flex items-center gap-1"><img src="assets/Vector-3.png" alt=""> ENHANCEMENT</div>`
+        if (issue.labels.includes("enhancement") === true) {
+            enhancement = `<div class="rounded-full px-3 py-1 bg-green-200 text-green-500 text-[15px] flex items-center gap-1"><img src="assets/Vector-3.png" alt=""> ENHANCEMENT</div>`
+        }
+        if (issue.labels.includes("help wanted") === true) {
+            help = `<div class="rounded-full px-3 py-1 bg-orange-200 text-orange-500 text-[15px] flex items-center gap-1"><img src="assets/Vector.png" alt=""> HELP WANTED</div>`
         }
 
-        else {
-            hasBug = `<div class="rounded-full px-3 py-1 bg-blue-200 text-blue-500 text-[15px] flex items-center gap-1"><i class="fa-regular fa-clipboard"></i> DOCUMENTED</div>`
+        if (issue.labels.includes("documentation") === true) {
+            documented = `<div class="rounded-full px-3 py-1 bg-blue-200 text-blue-500 text-[15px] flex items-center gap-1"><i class="fa-regular fa-clipboard"></i> DOCUMENTED</div>`
+        }
+
+        if (issue.labels.includes("good first issue") === true) {
+            goodFirstIssue = `<div class="rounded-full px-3 py-1 bg-gray-200 text-gray-500 text-[15px] flex items-center gap-1">GOOD FIRST ISSUE</div>`
         }
 
         if (issue.status.toLowerCase() === "open") {
@@ -157,8 +167,12 @@ function displayAllElement(issues) {
                         <p class="line-clamp-2 font-semibold text-2xl mb-3 min-h-15">${issue.title}</p>
                         <p class="line-clamp-2 text-[#64748B] mb-4">${issue.description}</p>
 
-                        <div class="flex flex-wrap items-center justify-center gap-2 pb-5">
+                        <div class="flex flex-wrap items-center  gap-2 pb-5">
                             ${hasBug}
+                            ${enhancement}
+                            ${help}
+                            ${goodFirstIssue}
+                            ${documented}
                         </div>
                         </div>
 
@@ -166,6 +180,7 @@ function displayAllElement(issues) {
                             <p class="text-[#64748B] pb-1">#${issue.id} by ${issue.author}</p>
                             <p class="text-[#64748B]">${issue.updatedAt.replace('T', ' T:').replace('Z', ' ')}</p>
                         </div>`;
+
 
         mainContainer.appendChild(card)
         if (issue.status.toLowerCase() === "open") {
