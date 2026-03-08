@@ -91,6 +91,24 @@ function closedContainer() {
 
 
 
+const searchInput = document.querySelector("[data-search]")
+let users = []
+
+searchInput.addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+
+    users.forEach(user => {
+        const isMatch = user.name.toLowerCase().includes(value);
+        user.element.classList.toggle("hidden", !isMatch);
+    });
+});
+
+
+
+
+
+
+
 async function loadData() {
     loadingSpinner.classList.remove("hidden");
     loadingSpinner.classList.add("flex");
@@ -107,7 +125,7 @@ async function loadData() {
 function displayAllElement(issues) {
     console.log("Displaying issues:", issues);
 
-    issues.map(issue => {
+    users = issues.map(issue => {
 
         let priorityColor = "";
         let BorderColor = "";
@@ -193,6 +211,8 @@ function displayAllElement(issues) {
         }
 
         allContainer();
+
+        return { name: issue.title, element: card }
     });
 }
 
