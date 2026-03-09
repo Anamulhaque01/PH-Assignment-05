@@ -7,52 +7,54 @@
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-
         *{
             font-family: "Geist", sans-serif;
         }
-
         body{
             background-color: #F8FAFC;
         }
     </style>
 </head>
-<body class="p-25 min-h-screen">
+<body class="p-4 md:p-10 min-h-screen flex items-center justify-center">
 
-    <div class="w-[520px] h-[743px] bg-white m-auto shadow-xl rounded-xl p-6 text-center">
-        <div class="m-auto w-30 h-30  flex items-center justify-center mb-2"><img class="" src="assets/github-logo.png" alt=""></div>
+    <div class="w-full max-w-[520px] bg-white shadow-xl rounded-xl p-6 text-center">
+        <div class="mx-auto w-24 h-24 flex items-center justify-center mb-2">
+            <img src="assets/github-logo.png" alt="Logo">
+        </div>
+        
         <h2 class="text-2xl font-semibold">GitHub Issues Tracker</h2>
         <p class="text-[#64748B]">Sign in to manage your issues</p>
 
-        <form action="">
-            <div class="card bg-base-100 w-full  shrink-0 m-auto">
-                <div class="card-body">
+        <form>
+            <div class="card bg-base-100 w-full shrink-0 mx-auto">
+                <div class="card-body px-0 sm:px-8">
                     <fieldset class="fieldset">
-                    <label class="label text-black text-[16px]">Username</label>
-                    <input id="userName" type="text" class="input w-full text-[16px] py-6" placeholder="Enter Username"/>
-                    <p class="text-[14px] text-[#4A00FF] text-left mb-1">Default: admin</p>
+                        <label class="label text-black text-[16px]">Username</label>
+                        <input id="userName" type="text" class="input w-full text-[16px] py-6" placeholder="Enter Username"/>
+                        <p class="text-[14px] text-[#4A00FF] text-left mb-1">Default: admin</p>
 
-                    <label class="label text-black text-[16px]">Password</label>
-                    <input id="userPass" type="password" class="input text-[16px] w-full py-6" placeholder="Enter Password" />
-                    <p class="text-[14px] text-[#4A00FF] text-left">Default: admin123</p>
-                    <button id="login-btn" class="btn btn-primary mt-4">Sign in</button>
+                        <label class="label text-black text-[16px]">Password</label>
+                        <input id="userPass" type="password" class="input text-[16px] w-full py-6" placeholder="Enter Password" />
+                        <p class="text-[14px] text-[#4A00FF] text-left">Default: admin123</p>
+                        
+                        <button id="login-btn" class="btn btn-primary mt-6 w-full">Sign in</button>
                     </fieldset>
                 </div>
             </div>
         </form>
 
-        <div class="flex items-center my-2">
+        <div class="flex items-center my-4">
             <div class="grow border-t border-gray-300"></div>
             <span class="px-3 text-gray-500 font-medium bg-white">OR</span>
             <div class="grow border-t border-gray-300"></div>
         </div>
+
         <p class="text-[#64748B]">Demo Credentials:</p>
-        <div class="bg-gray-100 rounded-xl h-20 flex flex-col items-center justify-center mt-3">
+        <div class="bg-gray-100 rounded-xl py-4 flex flex-col items-center justify-center mt-3">
             <p><span class="font-semibold">Username:</span> admin</p>
             <p><span class="font-semibold">Password:</span> admin123</p>
         </div>

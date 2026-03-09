@@ -7,61 +7,55 @@
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-
-        *{ 
-            font-family: "Geist", sans-serif;
-        }
-        
+        * { font-family: "Geist", sans-serif; }
     </style>
 </head>
-<body class="bg-[#F8FAFC] min-h-[945px]">
-    <header>
-        <nav class="h-18 px-15 flex items-center justify-between shadow-xs bg-white">
+<body class="bg-[#F8FAFC] min-h-screen">
+    <header class="sticky top-0 z-50">
+        <nav class="min-h-18 px-4 md:px-15 py-3 flex flex-col md:flex-row items-center justify-between shadow-xs bg-white gap-4">
             <div class="flex items-center gap-3">
-                <img src="/assets/github-logo.png" alt="" class="w-10">
-                <h1 class="font-semibold">GitHub Issues Tracker</h1>
+                <img src="/assets/github-logo.png" alt="Logo" class="w-10">
+                <h1 class="font-semibold text-lg">GitHub Issues Tracker</h1>
             </div>
-            <div class="relative w-72">
+            <div class="relative w-full md:w-72">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm" placeholder="Search" data-search>
+                <input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm" placeholder="Search issues..." data-search>
             </div>
         </nav>
     </header>
 
-    <main class="max-w-[90%] m-auto">
-        <div class="w-full h-[88px] bg-white mt-[60px] shadow rounded-xl flex items-center px-5 gap-3">
-            <button onclick="allContainer()" id="all-issue">All</button>
-            <button onclick="openedContainer()" id="open-issue">Open</button>
-            <button onclick="closedContainer()" id="close-issue">Close</button>
+    <main class="max-w-[95%] md:max-w-[90%] mx-auto">
+        <div class="w-full min-h-[88px] bg-white mt-8 shadow rounded-xl flex flex-wrap items-center px-5 gap-3 py-4">
+            <button onclick="allContainer()" id="all-issue" class="flex-1 md:flex-none">All</button>
+            <button onclick="openedContainer()" id="open-issue" class="flex-1 md:flex-none">Open</button>
+            <button onclick="closedContainer()" id="close-issue" class="flex-1 md:flex-none">Close</button>
         </div>
 
-        <div class="w-full h-[88px] bg-white mt-5 shadow rounded-t-xl flex items-center px-5">
-            <div class="flex items-center justify-between w-full">
+        <div class="w-full bg-white mt-5 shadow rounded-t-xl flex items-center px-5 py-6">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="p-2 bg-purple-100 rounded-full"><img src="assets/Aperture.png" alt=""></div>
+                    <div class="p-2 bg-purple-100 rounded-full shrink-0"><img src="assets/Aperture.png" alt=""></div>
                     <div>
                         <h1 class="font-semibold text-xl"><span id="Issue-counter">0</span> Issues</h1>
-                        <p class="text-[#64748B]">Track and manage your project issues</p>
+                        <p class="text-[#64748B] text-sm md:text-base">Track and manage your project issues</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-5">
+                <div class="flex items-center gap-5 text-sm font-medium">
                     <div class="flex items-center gap-2"><div class="w-3 h-3 bg-green-600 rounded-full"></div><p>Open</p></div>
                     <div class="flex items-center gap-2"><div class="w-3 h-3 bg-purple-600 rounded-full"></div><p>Closed</p></div>
                 </div>
             </div>
         </div>
 
-        <div id="main-container" class="p-5 grid gap-4 shadow rounded-b-2xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"></div>
-        <div id="open-container" class="p-5 gap-4 shadow rounded-b-2xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 hidden"></div>
-        <div id="close-container" class="p-5 gap-4 shadow rounded-b-2xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 hidden"></div>
+        <div id="main-container" class="p-5 grid gap-4 shadow rounded-b-2xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-white"></div>
+        <div id="open-container" class="p-5 gap-4 shadow rounded-b-2xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-white hidden"></div>
+        <div id="close-container" class="p-5 gap-4 shadow rounded-b-2xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-white hidden"></div>
         
         <div id="loadingSpinner" class="h-[60vh] hidden justify-center items-center">
             <span class="loading loading-spinner loading-xl text-blue-600"></span>
@@ -69,31 +63,31 @@
         <div class="h-20"></div>
     </main>
 
-    <dialog id="my_modal_1" class="modal">
-        <div class="modal-box max-w-2xl">
-            <h1 id="modal-title" class="text-2xl font-semibold line-clamp-2"></h1>
-            <div class="flex gap-2 text-[#64748B] mb-3">
-                <div id="modal-status" class="text-white rounded-full px-3 bg-green-600"></div>
-                •
+    <dialog id="my_modal_1" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box max-w-2xl w-full">
+            <h1 id="modal-title" class="text-xl md:text-2xl font-semibold line-clamp-2"></h1>
+            <div class="flex flex-wrap items-center gap-2 text-[#64748B] my-3 text-sm">
+                <div id="modal-status" class="text-white rounded-full px-3 py-0.5"></div>
+                <span class="hidden md:inline">•</span>
                 <p id="modal-author"></p>
-                •
+                <span class="hidden md:inline">•</span>
                 <p id="modal-date"></p>
             </div>
-            <div id="modal-labels" class="flex gap-2 mb-3"></div>
-            <p id="modal-description" class="text-[#64748B] mb-5"></p>
-            <div class="flex justify-between bg-gray-100 rounded-xl p-4">
+            <div id="modal-labels" class="flex flex-wrap gap-2 mb-4"></div>
+            <p id="modal-description" class="text-[#64748B] mb-6 text-sm md:text-base"></p>
+            <div class="flex flex-col sm:flex-row justify-between bg-gray-50 border border-gray-100 rounded-xl p-4 gap-4">
                 <div>
-                    <p class="text-[#64748B] mb-1">Assignee:</p>
+                    <p class="text-[#64748B] text-xs uppercase tracking-wider mb-1">Assignee</p>
                     <p id="modal-assignee" class="font-semibold"></p>
                 </div>
-                <div class="flex flex-col items-center">
-                    <p class="text-[#64748B] mb-1">Priority:</p>
+                <div>
+                    <p class="text-[#64748B] text-xs uppercase tracking-wider mb-1">Priority</p>
                     <div id="modal-priority"></div>
                 </div>
             </div>
             <div class="modal-action">
-                <form method="dialog">
-                    <button class="btn btn-primary">Close</button>
+                <form method="dialog" class="w-full sm:w-auto">
+                    <button class="btn btn-primary w-full sm:w-auto">Close</button>
                 </form>
             </div>
         </div>
