@@ -9,7 +9,7 @@ document.getElementById("login-btn").addEventListener("click", function (event) 
 
     if (userNameValue === "admin" && userPassValue === "admin123") {
         alert("Login Success");
-        window.location.href("./main.html");
+        window.location.href("main.html");
         userName.value = "";
         userPass.value = "";
     }
