@@ -126,7 +126,7 @@ function displayAllElement(issues) {
             document.getElementById("modal-author").innerText = `Opened by ${issue.author}`;
             document.getElementById("modal-date").innerText = issue.updatedAt.split('T')[0];
             document.getElementById("modal-labels").innerHTML = labelsHTML;
-            document.getElementById("modal-assignee").innerText = issue.assignee || "Unassigned";
+            document.getElementById("modal-assignee").innerText = issue.assignee;
             document.getElementById("modal-priority").innerHTML = `<div class="rounded-full px-7 py-1 ${priorityColor} text-[15px]">${issue.priority.toUpperCase()}</div>`;
 
             modal.showModal();
